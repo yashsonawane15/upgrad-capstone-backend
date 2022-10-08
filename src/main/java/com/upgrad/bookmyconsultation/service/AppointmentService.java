@@ -22,6 +22,8 @@ public class AppointmentService {
 	
 	//mark it autowired
 	//create an instance of AppointmentRepository called appointmentRepository
+	@Autowired
+	private AppointmentRepository appointmentRepository;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -34,7 +36,14 @@ public class AppointmentService {
 		//if the appointment exists throw the SlotUnavailableException
 		//save the appointment details to the database
 		//return the appointment id
-	
+	public String createAppointment(Appointment appointment) {
+		try {
+			Appointment savedAppointment = appointmentRepository.save(appointment);
+			return savedAppointment.getAppointmentId();
+		} catch(Exception e) {
+			throw e;
+		}
+	}
 	
 
 
@@ -43,7 +52,17 @@ public class AppointmentService {
 		//if the appointment exists return the appointment
 		//else throw ResourceUnAvailableException
 		//tip: use Optional.ofNullable(). Use orElseThrow() method when Optional.ofNullable() throws NULL
-	
+	public Appointment getAppointment(String id) {
+		try {
+			Optional<Appointment> appointment = appointmentRepository.findById(id);
+			return appointment.orElseThrow(() -> new ResourceUnAvailableException());
+		} catch(ResourceUnAvailableException rue) {
+			throw rue;
+		}
+		catch(Exception e) {
+			throw e;
+		}
+	}
 	public List<Appointment> getAppointmentsForUser(String userId) {
 		return appointmentRepository.findByUserId(userId);
 	}
