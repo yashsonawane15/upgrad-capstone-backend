@@ -30,7 +30,6 @@ public class AppointmentController {
 	@PostMapping("")
 	public ResponseEntity bookAppointment(@RequestBody Appointment appointment) {
 		String appointmentId = appointmentService.createAppointment(appointment);
-
 		return new ResponseEntity<String>(appointmentId, HttpStatus.CREATED);
 	}
 	
@@ -45,7 +44,6 @@ public class AppointmentController {
 	@GetMapping("/{appointmentId}")
 	public ResponseEntity getAppointment(@PathVariable String id) {
 		Appointment appointment = appointmentService.getAppointment(id);
-
 		return new ResponseEntity<Appointment>(appointment, HttpStatus.OK);
 	}
 	

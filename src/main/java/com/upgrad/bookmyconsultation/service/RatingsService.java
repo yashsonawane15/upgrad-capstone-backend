@@ -7,6 +7,7 @@ import com.upgrad.bookmyconsultation.repository.RatingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -32,8 +33,13 @@ public class RatingsService {
 		//find that specific doctor with the using doctor id
 		//modify the average rating for that specific doctor by including the new rating
 		//save the doctor object to the database
-	
+	public void submitRatings(@RequestBody Rating rating) {
+		try {
+			Rating savedRating = ratingsRepository.save(rating);
+		} catch(Exception e) {
+			throw e;
+		}
+	}
 	
 
-	}
 }

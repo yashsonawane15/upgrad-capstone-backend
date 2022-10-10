@@ -3,9 +3,11 @@ package com.upgrad.bookmyconsultation.entity;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Primary;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import java.util.UUID;
 
 
@@ -22,4 +24,11 @@ import java.util.UUID;
 	//create rating of type Integer
 	//create comments of type String
 	//Set access modifiers for all these members to 'private'
-	
+@NoArgsConstructor
+@Entity
+@Data
+public class Rating {
+
+    @Id
+    String id;
+}

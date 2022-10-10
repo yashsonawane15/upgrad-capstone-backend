@@ -42,7 +42,13 @@ public class UserAdminController {
 	
 		//return http response with status set to OK
 	
-	
+	@PostMapping("/register")
+	ResponseEntity<User> registerUser(@RequestBody User user) throws InvalidInputException {
+		User savedUser = userService.register(user);
+
+		return new ResponseEntity<User>(savedUser, HttpStatus.CREATED);
+	}
+
 
 
 	@GetMapping("/{userId}/appointments")
