@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Primary;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -31,4 +32,16 @@ public class Rating {
 
     @Id
     String id;
+
+    @Column
+    String appointmentId;
+
+    @Column
+    String doctorId;
+
+    @Column
+    int rating;
+
+    @Column
+    String comments;
 }
