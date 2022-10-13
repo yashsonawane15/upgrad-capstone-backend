@@ -29,7 +29,7 @@ public class AppointmentController {
 		//return http response using ResponseEntity
 	@PostMapping("")
 	public ResponseEntity bookAppointment(@RequestBody Appointment appointment) {
-		String appointmentId = appointmentService.createAppointment(appointment);
+		String appointmentId = appointmentService.appointment(appointment);
 		return new ResponseEntity<String>(appointmentId, HttpStatus.CREATED);
 	}
 	

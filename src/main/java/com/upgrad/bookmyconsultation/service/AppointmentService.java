@@ -7,6 +7,7 @@ import com.upgrad.bookmyconsultation.exception.SlotUnavailableException;
 import com.upgrad.bookmyconsultation.repository.AppointmentRepository;
 import com.upgrad.bookmyconsultation.repository.UserRepository;
 import com.upgrad.bookmyconsultation.util.ValidationUtils;
+import io.micrometer.core.instrument.config.validate.Validated;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,10 +37,13 @@ public class AppointmentService {
 		//if the appointment exists throw the SlotUnavailableException
 		//save the appointment details to the database
 		//return the appointment id
-	public String createAppointment(Appointment appointment) {
+	public String appointment(Appointment appointment) {
 		try {
+			ValidationUtils.validate(appointment);
 			Appointment savedAppointment = appointmentRepository.save(appointment);
 			return savedAppointment.getAppointmentId();
+		} catch(InvalidInputException iie) {
+			throw iie;
 		} catch(Exception e) {
 			throw e;
 		}
